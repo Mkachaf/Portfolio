@@ -2,7 +2,7 @@
 
 Bienvenue sur mon portfolio en ligne !  
 
-Je m'appelle **Meriem Kachaf**, développeuse web en formation, passionnée par l'informatique, le développement web et la création d'interfaces modernes et responsives.
+Je m'appelle **Meriem Kachaf**, développeuse web en formation, passionnée par l'informatique, le développement web.
 
 ## À propos
 

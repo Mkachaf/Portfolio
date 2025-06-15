@@ -1,41 +1,63 @@
-const projects = [
-  {
-    title: "Générateur de factures XML → PDF",
-    shortDesc: "Automatisation de la génération et l’envoi de factures PDF via PHP.",
-    moreInfo: "Ce projet utilise mPDF pour générer des PDF à partir de données XML, et PHPMailer pour envoyer les factures par email automatiquement. Idéal pour la gestion commerciale.",
-  },
-  {
-    title: "Site de décoration maison",
-    shortDesc: "Site web responsive avec catalogue de produits déco.",
-    moreInfo: "Un site fictif pour présenter des idées de décoration intérieure. Technologies utilisées : HTML, CSS, JavaScript, avec une attention portée sur le design responsive.",
-  },
-  {
-    title: "Portfolio dynamique",
-    shortDesc: "Ce portfolio que vous voyez, construit avec HTML, CSS et JavaScript.",
-    moreInfo: "Utilisation de JavaScript pour afficher dynamiquement les projets, permettre l’interaction et améliorer l’expérience utilisateur.",
-  }
-];
-
-const projectsList = document.getElementById("projects-list");
-
-projects.forEach((project, index) => {
-  const card = document.createElement("div");
-  card.classList.add("project-card");
+document.addEventListener("DOMContentLoaded", () => {
+  // Navigation mobile
+  const hamburger = document.querySelector('.hamburger');
+  const navLinks = document.querySelector('.nav-links');
   
-  card.innerHTML = `
-    <div class="project-title">${project.title}</div>
-    <div class="project-desc">${project.shortDesc}</div>
-    <button aria-expanded="false">Voir plus</button>
-    <div class="project-more">${project.moreInfo}</div>
-  `;
-
-  const button = card.querySelector("button");
-  button.addEventListener("click", () => {
-    card.classList.toggle("show-more");
-    const expanded = button.getAttribute("aria-expanded") === "true";
-    button.setAttribute("aria-expanded", !expanded);
-    button.textContent = expanded ? "Voir plus" : "Voir moins";
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
   });
+  
+  // Fermer le menu lorsqu'un lien est cliqué
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('active');
+    });
+  });
+  
+  // Formulaire de contact
+  const form = document.getElementById("contactForm");
+  const formMessage = document.getElementById("formMessage");
+  
+  if (form) {
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+      
+      // Animation de soumission
+      formMessage.textContent = "Merci pour votre message ! Je vous répondrai bientôt.";
+      formMessage.style.color = "#28a745";
+      
+      // Réinitialiser le formulaire après 3 secondes
+      setTimeout(() => {
+        form.reset();
+      }, 3000);
+    });
+  }
+  
+  // Animation au scroll
+  const animateOnScroll = () => {
+    const cards = document.querySelectorAll('.card');
+    const windowHeight = window.innerHeight;
+    
+    cards.forEach(card => {
+      const cardPosition = card.getBoundingClientRect().top;
+      const scrollPosition = windowHeight / 1.3;
+      
+      if (cardPosition < scrollPosition) {
+        card.classList.add('show');
+      }
+    });
+  };
+  
+  // Initialiser les animations
+  window.addEventListener('scroll', animateOnScroll);
+  animateOnScroll(); // Pour les éléments déjà visibles au chargement
+});
 
-  projectsList.appendChild(card);
+// Ajoutez dans la fonction animateOnScroll (vers la fin)
+const veilleItems = document.querySelectorAll('.tool-item');
+veilleItems.forEach(item => {
+  const itemPosition = item.getBoundingClientRect().top;
+  if (itemPosition < windowHeight / 1.3) {
+    item.classList.add('show');
+  }
 });
